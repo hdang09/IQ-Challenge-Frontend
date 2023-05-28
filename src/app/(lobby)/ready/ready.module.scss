@@ -1,0 +1,42 @@
+@import '../register/register.module.scss';
+
+.right-content {
+    width: 425px;
+
+    // ${down('sm')} {
+    //     width: auto;
+    //     margin-bottom: 50px;
+    // }
+}
+
+.list {
+    list-style: none;
+    padding-top: 22px;
+}
+
+.item {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+
+    & svg {
+        fill: #45ce7b;
+        width: 25px;
+        height: 25px;
+    }
+
+    & p {
+        margin: 0;
+        margin-left: 16px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        color: #7b7b81;
+    }
+
+    // ${down('sm')} {
+    //     & p {
+    //         font-size: 15px;
+    //     }
+    // }
+}

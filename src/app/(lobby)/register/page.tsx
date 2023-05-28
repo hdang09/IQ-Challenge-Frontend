@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './register.module.scss';
 import classnames from 'classnames/bind';
 import Button from '@/components/Button';
+import Image from 'next/image';
+import Logo from '@/assets/logo.svg';
+import Bulb from '@/assets/login.svg';
 
 const cx = classnames.bind(styles);
 
@@ -27,10 +30,10 @@ const Register = () => {
     };
 
     return (
-        <main className={cx('wrapper')}>
+        <>
             <div className={cx('left-content')}>
                 <header className={cx('header')}>
-                    {/* <AnimateSVG svg={Logo} /> */}
+                    <Image src={Logo} width={75} height={85} alt="F-Code Logo" />
                     <h2>F-Code</h2>
                 </header>
                 <h1 className={cx('title')}>
@@ -53,16 +56,19 @@ const Register = () => {
                     // onKeyDown={(e) => e.keyCode === 13 && validate}
                     placeholder="SE180000"
                 />
-                <div className={cx('wrapper-buttons')}>
+                <div className={cx('submit-button')}>
                     <Button
-                    // onClick={validate}
+                        href="/ready"
+                        // onClick={validate}
                     >
                         Tiếp tục
                     </Button>
                 </div>
             </div>
-            <div className={cx('right-content')}>{/* <AnimateSVG svg={Bulb} /> */}</div>
-        </main>
+            <div className={cx('right-content')}>
+                <Image src={Bulb} alt="Right content" />
+            </div>
+        </>
     );
 };
 

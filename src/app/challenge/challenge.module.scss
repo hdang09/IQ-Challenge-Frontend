@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: #f5f5f5;
+
+    // ${down('sm')} {
+    //     margin-top: 40px;
+    //     background: #fff;
+    // }
+}
+
+.container {
+    margin-left: 375px;
+    padding: 20px 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    // & > p {
+    //     color: #bdbdbd;
+    // }
+
+    // ${down('md')} {
+    //     margin-left: 0;
+    // }
+
+    // ${between('md', 'lg')} {
+    //     margin-left: 350px;
+    // }
+}

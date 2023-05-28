@@ -1,5 +1,6 @@
 .wrapper {
     width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -45,11 +46,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 24px;
-
-    & object {
-        width: 70px;
-        height: 85px;
-    }
 
     // ${down('sm')} {
     //     display: none;
@@ -115,18 +111,18 @@
     //     margin: 0 16px 34px 16px;
     // }
 
-    .code {
+    &.code {
         text-transform: uppercase;
         margin-bottom: 34px;
     }
 
-    .name {
+    &.name {
         text-transform: capitalize;
         margin-bottom: 12px;
     }
 }
 
-.wrapper-button {
+.submit-button {
     //     ${down('sm')} {
     //         display: flex;
     //         justify-content: center;
