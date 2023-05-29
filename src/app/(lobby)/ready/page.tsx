@@ -26,18 +26,6 @@ const LIST = [
 ];
 
 const Ready = () => {
-    const startChallenge = async () => {
-        // const name = localStorage.getItem('name');
-        // const studentID = localStorage.getItem('studentID');
-        // try {
-        //     const res = await startTheTest(name, studentID);
-        //     navigate('/challenge');
-        // } catch (error) {
-        //     console.log(error);
-        //     toast.error(error.response.data.message);
-        // }
-    };
-
     return (
         <>
             <Image src={Question} alt="Ready for the challenge" />
@@ -56,12 +44,7 @@ const Ready = () => {
                     ))}
                 </ul>
                 <div className={cx('submit-button')}>
-                    <Button
-                        href="/challenge"
-                        // onClick={startChallenge}
-                    >
-                        Bắt đầu thử thách
-                    </Button>
+                    <Button href="/challenge">Bắt đầu thử thách</Button>
                 </div>
             </div>
         </>

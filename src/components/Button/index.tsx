@@ -4,22 +4,23 @@ import classnames from 'classnames/bind';
 
 const cx = classnames.bind(styles);
 
-interface ButtonProps {
+type ButtonProps = {
     children: string | React.ReactNode;
     href?: string;
-}
+    onClick?: () => void;
+};
 
-const Button = ({ children = 'Click me!', href, ...rest }: ButtonProps) => {
+const Button = ({ children = 'Click me!', href, onClick, ...rest }: ButtonProps) => {
     if (href) {
         return (
-            <Link href={href} className={cx('wrapper')} {...rest}>
+            <Link href={href} className={cx('wrapper')} onClick={onClick} {...rest}>
                 {children}
             </Link>
         );
     }
 
     return (
-        <button className={cx('wrapper')} {...rest}>
+        <button className={cx('wrapper')} onClick={onClick} {...rest}>
             {children}
         </button>
     );
