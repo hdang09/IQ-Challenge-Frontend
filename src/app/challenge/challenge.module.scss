@@ -33,3 +33,37 @@
         margin-left: 350px;
     }
 }
+
+.questions {
+    /* width: 100%; */
+    /* height: max-content; */
+    /* overflow-x: auto; */
+    display: flex;
+    height: max-content;
+    width: 100%;
+    overflow-y: hidden;
+    width: 100%;
+    padding: 4px;
+
+    &::-webkit-scrollbar {
+        border-radius: 0;
+        width: 8px;
+        height: 4px;
+    }
+
+    & span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #919196;
+        min-width: 83px;
+        height: 35px;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    & span.active {
+        background: #33bd64;
+        color: #fff;
+    }
+}

@@ -5,7 +5,7 @@ import classnames from 'classnames/bind';
 import Timer from '../Timer';
 import Image from 'next/image';
 import { Question } from '@/app/challenge/page';
-import { AnswersData } from '@/context/AnswerContext';
+import { AnswersData } from '@/app/challenge/layout';
 import localStorageUtil from '@/utils/localStorage';
 import Popup from '../Popup';
 

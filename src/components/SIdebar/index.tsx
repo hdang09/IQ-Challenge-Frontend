@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import classnames from 'classnames/bind';
 import styles from './sidebar.module.scss';
 import Image from 'next/image';
@@ -7,7 +7,7 @@ import ecliseRunner from '../../assets/eclipse5.png';
 import ecliseBG from '../../assets/eclipse6.png';
 import Logo from '../../assets/logo.svg';
 import Timer from '../Timer';
-import { AnswersData } from '@/context/AnswerContext';
+import { AnswersData } from '@/app/challenge/layout';
 import Link from 'next/link';
 import Popup from '../Popup';
 

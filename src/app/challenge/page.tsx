@@ -3,12 +3,12 @@
 import { useState, useEffect, useContext } from 'react';
 import classnames from 'classnames/bind';
 import styles from './challenge.module.scss';
-import Sidebar from '@/components/SIdebar';
+import Sidebar from '@/components/Sidebar';
 import { startTheTest } from '@/utils/iqApi';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/Card';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
-import { AnswersData } from '@/context/AnswerContext';
+import { AnswersData } from '@/app/challenge/layout';
 
 const cx = classnames.bind(styles);
 

@@ -2,12 +2,16 @@
 
 .main {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 
-    @include xs {
-        flex-direction: column;
+    @include sm {
+        flex-direction: column-reverse;
+
+        img {
+            width: 100%;
+        }
     }
 }
