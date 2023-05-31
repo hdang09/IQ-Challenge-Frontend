@@ -1,3 +1,5 @@
+@import '../../config/media-queries.scss';
+
 .wrapper {
     display: flex;
     align-items: center;
@@ -11,29 +13,34 @@
     margin-bottom: 20px;
     border: 1px solid #e0e0e0;
 
-    a {
+    span {
         display: none;
     }
 
-    // ${down('sm')} {
-    //     width: auto;
-    //     height: auto;
-    //     flex-direction: column;
-    //     padding: 24px 16px;
-    //     box-shadow: none;
-    //     border: none;
+    @include sm {
+        width: auto;
+        height: auto;
+        flex-direction: column;
+        padding: 24px 16px;
+        box-shadow: none;
+        border: none;
+        margin-top: 25px;
 
-    //     a {
-    //         display: block;
-    //     }
-    // }
+        span {
+            display: block;
+        }
+    }
 
-    // ${between('sm', 'xl')} {
-    //     width: auto;
-    //     justify-content: center;
-    //     flex-direction: column;
-    //     padding: 36px;
-    // }
+    @include sm-xl {
+        width: auto;
+        justify-content: center;
+        flex-direction: column;
+        padding: 36px;
+    }
+
+    @include sm-md {
+        margin-top: 100px;
+    }
 }
 
 .question {
@@ -63,31 +70,36 @@
     }
 
     & > p:first-child {
-        // ${up('sm')} {
-        //     display: none;
-        // }
+        @include gt-sm {
+            display: none;
+        }
     }
 
-    /* & p {
+    & p {
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
         color: #21222d;
         margin-top: 15px;
-    } */
+    }
 
-    // ${down('sm')} {
-    //     width: auto;
+    @include sm {
+        width: auto;
 
-    //     & img {
-    //         width: calc(100vw - 32px);
-    //     }
-    // }
+        & img {
+            width: calc(100vw - 32px);
+        }
+    }
 }
 .answers-list {
-    // ${down('sm')} {
-    //     margin-top: 36px;
-    // }
+    button {
+        border: none;
+        cursor: pointer;
+    }
+
+    @include sm {
+        margin-top: 36px;
+    }
 }
 
 .answers-item {
@@ -100,11 +112,11 @@
     border-radius: 42px;
     margin-bottom: 20px;
 
-    // ${up('sm')} {
-    //     &:last-child {
-    //         margin-bottom: 0;
-    //     }
-    // }
+    @include gt-sm {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
     & span {
         display: flex;

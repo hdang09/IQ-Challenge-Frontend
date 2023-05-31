@@ -3,8 +3,6 @@ import { API_URL } from '../config/runtime.config';
 import Method from '../config/method.enum';
 
 export const request = (endpoint: string, method: Method, headers = {}, params = {}, body = {}) => {
-    console.log(API_URL + endpoint);
-
     return axios({
         url: API_URL + endpoint,
         method,

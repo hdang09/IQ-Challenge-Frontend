@@ -1,3 +1,5 @@
+@import '../../config/media-queries.scss';
+
 .main {
     width: 100vw;
     height: 100vh;
@@ -5,7 +7,7 @@
     align-items: center;
     justify-content: space-evenly;
 
-    // ${down('sm')} {
-    //     flex-direction: column;
-    // }
+    @include xs {
+        flex-direction: column;
+    }
 }

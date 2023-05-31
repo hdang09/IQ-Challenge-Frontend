@@ -1,3 +1,5 @@
+@import '../../config/media-queries.scss';
+
 .wrapper {
     position: fixed;
     left: 0;
@@ -8,13 +10,13 @@
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.035), 0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725),
         0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
 
-    // ${down('md')} {
-    //     display: none;
-    // }
+    @include md {
+        display: none;
+    }
 
-    // ${between('md', 'lg')} {
-    //     width: 325px;
-    // }
+    @include md-lg {
+        width: 325px;
+    }
 }
 
 .header {
@@ -117,64 +119,5 @@
 
     &.active {
         color: #33bd64;
-    }
-}
-
-.dialog-wrapper {
-    padding: 52px 36px 32px;
-    position: relative;
-
-    & h1 {
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 29px;
-        color: #21222d;
-        margin-bottom: 20px;
-
-        span {
-            color: #45ce7b;
-        }
-    }
-
-    & p {
-        font-weight: 400;
-        font-size: 15px;
-        line-height: 18px;
-        color: #7b7b81;
-        margin-bottom: 20px;
-    }
-
-    & h2 {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 19px;
-        color: #7b7b81;
-        margin-bottom: 20px;
-
-        span {
-            color: #f9af0b;
-        }
-    }
-
-    & > div {
-        float: right;
-
-        // ${down('sm')} {
-        //     justify-content: space-between;
-        //     width: 100%;
-        //     display: flex;
-        // }
-    }
-
-    & > div > button:first-child {
-        height: 50px;
-        font-size: 18px;
-        color: #45ce7b;
-        background-color: transparent;
-        padding: 0 36px;
-
-        // ${down('sm')} {
-        //     padding: 0;
-        // }
     }
 }

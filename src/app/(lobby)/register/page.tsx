@@ -16,13 +16,10 @@ const Register = () => {
     const [name, setName] = useState<string>('');
     const [studentID, setStudentID] = useState<string>('');
 
-    console.log(name + studentID);
-
     let router = useRouter();
 
     const validate = async () => {
         const isValid = /^(S|s)[E|A|S|s|e|a]+([0-9]{6})$/.test(studentID);
-        console.log(isValid);
 
         if (isValid) {
             try {

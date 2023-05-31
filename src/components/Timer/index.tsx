@@ -5,7 +5,7 @@ import classnames from 'classnames/bind';
 
 const cx = classnames.bind(styles);
 
-const Timer = ({ timeStart }: { timeStart: number }) => {
+const Timer = ({ timeStart }: { timeStart?: number }) => {
     const [time, setTime] = useState(0);
     let startOfTime: number = JSON.parse(localStorage.getItem('time_start') || '0') || timeStart;
 

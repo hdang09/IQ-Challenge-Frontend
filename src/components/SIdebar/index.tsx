@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext, useState } from 'react';
 import classnames from 'classnames/bind';
 import styles from './sidebar.module.scss';
 import Image from 'next/image';
@@ -6,25 +6,15 @@ import Button from '../Button';
 import ecliseRunner from '../../assets/eclipse5.png';
 import ecliseBG from '../../assets/eclipse6.png';
 import Logo from '../../assets/logo.svg';
+import Timer from '../Timer';
+import { AnswersData } from '@/context/AnswerContext';
+import Link from 'next/link';
+import Popup from '../Popup';
 
 const cx = classnames.bind(styles);
+
 const Sidebar = () => {
-    // const dispatch = useDispatch();
-    // const answers = useSelector(studentAnswersSelector);
-
-    // const [open, setOpen] = useState(false);
-
-    // const handleOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
-    // const handleClick = (i) => {
-    //     dispatch(setCurrentQuestion(i));
-    // };
+    const data = useContext(AnswersData);
 
     return (
         <aside className={cx('wrapper')}>
@@ -38,35 +28,23 @@ const Sidebar = () => {
                     <Image src={ecliseBG} alt="Background timer" />
                     <Image src={ecliseRunner} alt="Outline timer" />
                     <div />
-                    {/* <Timer /> */}
+                    <Timer />
                 </div>
             </div>
             <div className={cx('item')}>
                 <h2>Câu hỏi</h2>
                 <div className={cx('questions')}>
-                    {/* {questions.map((item) => (
-                        <div
-                            className={cx('question')}
-                            key={item}
-                            onClick={() => handleClick(item)}
-                            className={answers[item] ? 'active' : ''}
-                        >
-                            {item + 1}
-                        </div>
-                    ))} */}
+                    {data?.answers.map((item, idx) => (
+                        <Link href={`/challenge#${idx + 1}`} className={cx('question', item ? 'active' : '')} key={idx}>
+                            {++idx}
+                        </Link>
+                    ))}
                 </div>
             </div>
             <div className={cx('item')}>
-                <Button
-                    href="/success"
-                    //  onClick={handleOpen}
-                >
-                    Nộp bài
-                </Button>
+                <Popup trigger={<Button>Nộp bài</Button>} />
                 <p>Kiểm tra bài làm kĩ trước khi nộp</p>
             </div>
-
-            {/* <Popup open={open} handleClose={handleClose} /> */}
         </aside>
     );
 };

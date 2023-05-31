@@ -1,12 +1,13 @@
 @import '../register/register.module.scss';
+@import '../../../config/media-queries.scss';
 
 .right-content {
     width: 425px;
 
-    // ${down('sm')} {
-    //     width: auto;
-    //     margin-bottom: 50px;
-    // }
+    @include sm {
+        width: auto;
+        margin-bottom: 50px;
+    }
 }
 
 .list {
@@ -34,9 +35,9 @@
         color: #7b7b81;
     }
 
-    // ${down('sm')} {
-    //     & p {
-    //         font-size: 15px;
-    //     }
-    // }
+    @include sm {
+        & p {
+            font-size: 15px;
+        }
+    }
 }

@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import classnames from 'classnames/bind';
 import styles from './challenge.module.scss';
 import Sidebar from '@/components/SIdebar';
 import { startTheTest } from '@/utils/iqApi';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/Card';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
+import { AnswersData } from '@/context/AnswerContext';
 
 const cx = classnames.bind(styles);
 
@@ -27,8 +29,12 @@ const Challenge = () => {
             return timeStart;
         }
     });
-    const currentIndexQuestion: number = 0;
-    // const currentIndexQuestion = useSelector(challengeSelector);
+
+    const data = useContext(AnswersData);
+
+    const currentIndexQuestion: number = data?.currentIdx || 0;
+
+    const { width } = useWindowDimensions();
 
     const router = useRouter();
 
@@ -54,21 +60,32 @@ const Challenge = () => {
     }, [router]);
 
     return (
-        <main className={cx('wrapper')}>
+        <div className={cx('wrapper')}>
             <Sidebar />
             <div className={cx('container')}>
-                {questions && (
+                {width < 768 ? (
                     <Card
-                        data={questions[currentIndexQuestion]}
+                        data={questions && questions[currentIndexQuestion]}
                         index={currentIndexQuestion}
-                        // key={questions._id}
-                        key={0}
+                        key={currentIndexQuestion}
                         timeStart={timeStart}
-                        isLong={questions[currentIndexQuestion].isLong}
+                        isLong={questions && questions[currentIndexQuestion]?.isLong}
                     />
+                ) : (
+                    questions?.map((question, idx) => {
+                        return (
+                            <Card
+                                data={question}
+                                index={idx++}
+                                key={question._id}
+                                timeStart={timeStart}
+                                isLong={question.isLong}
+                            />
+                        );
+                    })
                 )}
             </div>
-        </main>
+        </div>
     );
 };
 

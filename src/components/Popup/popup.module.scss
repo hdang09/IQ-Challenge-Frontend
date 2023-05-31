@@ -1,0 +1,61 @@
+@import '../../config/media-queries.scss';
+
+.dialog {
+    padding: 36px;
+    position: relative;
+
+    & h1 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        color: #21222d;
+        margin-bottom: 20px;
+
+        span {
+            color: #45ce7b;
+        }
+    }
+
+    & p {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #7b7b81;
+        margin-bottom: 20px;
+    }
+
+    & h2 {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #7b7b81;
+        margin-bottom: 20px;
+
+        span {
+            color: #f9af0b;
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    & :first-child {
+        height: 50px;
+        font-size: 18px;
+        color: #45ce7b;
+        background-color: transparent;
+        padding: 0 36px;
+
+        @include sm {
+            padding: 0;
+        }
+    }
+
+    @include sm {
+        justify-content: space-between;
+        width: 100%;
+        display: flex;
+    }
+}
