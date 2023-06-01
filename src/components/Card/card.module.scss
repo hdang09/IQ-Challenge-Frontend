@@ -7,8 +7,8 @@
     padding: 36px 0;
     justify-content: space-evenly;
     background: #ffffff;
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.035), 0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725),
-        0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.035), 0px 6.6px 5.3px rgba(0, 0, 0, 0.03),
+        0px 2.7px 2.2px rgba(0, 0, 0, 0.0196802);
     border-radius: 12px;
     margin-bottom: 20px;
     border: 1px solid #e0e0e0;
@@ -21,14 +21,10 @@
         width: auto;
         height: auto;
         flex-direction: column;
-        padding: 24px 16px;
+        padding: 32px 16px;
+        margin-top: 12px;
         box-shadow: none;
         border: none;
-        margin-top: 25px;
-
-        span {
-            display: block;
-        }
     }
 
     @include sm-xl {
@@ -40,6 +36,14 @@
 
     @include sm-md {
         margin-top: 100px;
+    }
+
+    @include md {
+        span {
+            cursor: pointer;
+            color: #45ce7b;
+            display: block;
+        }
     }
 }
 
@@ -55,7 +59,8 @@
     }
 
     & img {
-        width: inherit;
+        min-width: 350px;
+        height: auto;
     }
 
     & h1 {

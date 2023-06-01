@@ -47,10 +47,9 @@
     display: flex;
 
     @include md {
-        align-items: center;
         width: 100vw;
         background: #fff;
-        margin-top: 65px;
+        margin-top: 60px;
         min-height: calc(100vh - 65px);
     }
 }

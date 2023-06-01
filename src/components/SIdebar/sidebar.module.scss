@@ -9,6 +9,7 @@
     background-color: #fff;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.035), 0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725),
         0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+    overflow-y: auto;
 
     @include md {
         display: none;
@@ -23,11 +24,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    & object {
-        width: 70px;
-        height: 85px;
-    }
 
     & h2 {
         font-weight: 800;

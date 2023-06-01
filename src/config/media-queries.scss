@@ -49,6 +49,12 @@ $screen-xll: 1440px;
     }
 }
 
+@mixin sm-lg {
+    @media screen and (min-width: #{$screen-sm}) and (max-width: #{$screen-lg}) {
+        @content;
+    }
+}
+
 @mixin sm-xl {
     @media screen and (min-width: #{$screen-sm}) and (max-width: #{$screen-xl}) {
         @content;

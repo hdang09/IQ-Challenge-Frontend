@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import { timeConvert } from '@/utils/timeConvert';
-import styles from './timer.module.scss';
-import classnames from 'classnames/bind';
 
-const cx = classnames.bind(styles);
+import classnames from 'classnames/bind';
+import localStorageUtil from '@/utils/localStorage';
+import styles from './timer.module.scss';
+import { timeConvert } from '@/utils/timeConvert';
+
+const cn = classnames.bind(styles);
 
 const Timer = ({ timeStart }: { timeStart?: number }) => {
     const [time, setTime] = useState(0);
-    let startOfTime: number = JSON.parse(localStorage.getItem('time_start') || '0') || timeStart;
+    const timeLocalStorage = localStorageUtil.getItem('time_start');
+    let startOfTime: number = timeLocalStorage ? JSON.parse(timeLocalStorage) : timeStart;
 
     useEffect(() => {
         let timer = setInterval(() => {
@@ -16,7 +19,7 @@ const Timer = ({ timeStart }: { timeStart?: number }) => {
         return () => clearInterval(timer);
     }, [startOfTime]);
 
-    return <p className={cx('clock')}>{timeConvert(time)}</p>;
+    return <h3 className={cn('clock')}>{timeConvert(time)}</h3>;
 };
 
 export default Timer;

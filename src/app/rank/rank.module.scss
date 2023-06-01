@@ -1,3 +1,5 @@
+@import '@/config/media-queries.scss';
+
 .wrapper {
     width: 50vw;
     background-color: #fff;
@@ -25,16 +27,16 @@
         }
     }
 
-    // ${down('md')} {
-    //     width: inherit;
-    //     height: inherit;
+    @include md {
+        width: inherit;
+        height: inherit;
 
-    //     h2 {
-    //         color: #000;
-    //         font-size: 26px;
-    //         margin-bottom: 6px;
-    //     }
-    // }
+        h2 {
+            color: #000;
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+    }
 }
 
 .table {
@@ -62,7 +64,12 @@
 }
 
 .body-row {
-    & td {
-        // ${(props) => (props.isCurrentUser ? 'background: #fafafa; color: #45ce7b' : 'background: #fff')}
+    tr {
+        background: #fff;
+    }
+
+    &.active {
+        background: #fafafa;
+        color: #45ce7b;
     }
 }

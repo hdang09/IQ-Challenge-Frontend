@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import styles from './rank.module.scss';
+import { useEffect, useState } from 'react';
+
+import { GetServerSideProps } from 'next';
 import classnames from 'classnames/bind';
+import localStorage from '@/utils/localStorage';
 import { seeScoreBoard } from '@/utils/iqApi';
+import styles from './rank.module.scss';
 import { timeConvert } from '@/utils/timeConvert';
 
-const cx = classnames.bind(styles);
+const cn = classnames.bind(styles);
 
 type User = {
     name: string;
@@ -21,7 +24,7 @@ type Scoreboard = {
     users: User[];
 };
 
-const Rank: React.FC = () => {
+const Rank: React.FC = (props) => {
     const [scoreboard, setScoreboard] = useState<Scoreboard>();
 
     useEffect(() => {
@@ -59,7 +62,7 @@ const Rank: React.FC = () => {
     };
 
     return (
-        <main className={cx('wrapper')}>
+        <main className={cn('wrapper')}>
             <h2>
                 Bảng xếp hạng <span>Finding Apollo</span>
             </h2>
@@ -74,7 +77,7 @@ const Rank: React.FC = () => {
             </h3>
             <Countdown />
 
-            <table className={cx('table')}>
+            <table className={cn('table')}>
                 <thead>
                     <tr>
                         <th>Top</th>
@@ -88,11 +91,7 @@ const Rank: React.FC = () => {
                     {scoreboard?.users.map((user, i) => {
                         if (user.name !== '') {
                             return (
-                                <tr
-                                    className={cx('body-row')}
-                                    key={i}
-                                    // isCurrentUser={scoreboard?.studentRank - 1 === i}
-                                >
+                                <tr className={cn('body-row', scoreboard?.studentRank - 1 === i && 'active')} key={i}>
                                     <td>{++i}</td>
                                     <td>{user.name.replace(/(^\w{1})|(\s+\w{1})/g, (match) => match.toUpperCase())}</td>
                                     <td>{user.studentID}</td>

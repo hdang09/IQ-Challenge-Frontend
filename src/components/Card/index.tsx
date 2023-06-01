@@ -1,15 +1,16 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import styles from './card.module.scss';
-import classnames from 'classnames/bind';
-import Timer from '../Timer';
+import AnswersData from '@/config/contextData';
 import Image from 'next/image';
-import { Question } from '@/app/challenge/page';
-import { AnswersData } from '@/app/challenge/layout';
-import localStorageUtil from '@/utils/localStorage';
 import Popup from '../Popup';
+import { Question } from '@/app/challenge/page';
+import Timer from '../Timer';
+import classnames from 'classnames/bind';
+import localStorageUtil from '@/utils/localStorage';
+import styles from './card.module.scss';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 
-const cx = classnames.bind(styles);
+const cn = classnames.bind(styles);
 
 const Card = ({
     data,
@@ -22,53 +23,43 @@ const Card = ({
     index: number;
     timeStart: number;
     isLong?: boolean;
-    key: number;
+    key: number | string;
 }) => {
-    // const dispatch = useDispatch();
     const choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     const contextData = useContext(AnswersData);
 
-    const answersFromLocal: number[] = JSON.parse(localStorage.getItem('answers') || '[]');
-    const [reRender, setReRender] = useState<boolean>(false);
+    const { width } = useWindowDimensions();
 
     const changeNextQuestion = () => {
-        console.log('hello');
-
-        contextData?.setCurrentIdx((prev) => ++prev);
+        contextData.setCurrentIdx((prev) => ++prev);
     };
 
-    const handleUserAnswers = (question: number, ans: number) => {
-        contextData?.setAnswers((prev) => {
-            let newData = [...prev];
-            newData[question - 1] = ans;
-            return newData;
-        });
-        localStorageUtil.setItem('answers', JSON.stringify(contextData?.answers));
-        setReRender(!reRender);
-        // dispatch(setUserAnswers({ num, ans }));
+    const handleUserAnswers = (question: number, newAns: number) => {
+        let newUserAnswers = contextData.answers.map((oldAns, idx) => (idx === question ? newAns : oldAns));
+
+        contextData.setAnswers(newUserAnswers);
+        localStorageUtil.setItem('answers', JSON.stringify(newUserAnswers));
     };
 
     const showImgOrText = (item: string) => {
         if (item.startsWith('/images/')) {
-            return <Image src={item} alt="Quiz image" width={200} height={300} />;
+            return <Image src={item} alt="Quiz image" width={400} height={500} />;
         }
         if (isLong) return <p>{item}</p>;
         return <h1>{item}</h1>;
     };
 
-    useEffect(() => {}, [reRender]);
-
     return (
-        <div className={cx('wrapper')} id={JSON.stringify(index + 1)} key={key}>
-            <div className={cx('question')}>
-                <Timer timeStart={timeStart} />
+        <div className={cn('wrapper')} id={JSON.stringify(index + 1)} key={key}>
+            <div className={cn('question')}>
+                {width < 768 && <Timer timeStart={timeStart} />}
                 <h2>Câu hỏi số {index + 1}</h2>
                 {data?.question?.map((item) => showImgOrText(item))}
             </div>
-            <div className={cx('answers-list')}>
+            <div className={cn('answers-list')}>
                 {data?.multipleChoice?.map((item, idx) => (
                     <button
-                        className={cx('answers-item', contextData?.answers[index - 1] === idx + 1 ? 'active' : '')}
+                        className={cn('answers-item', contextData.answers[index] === idx + 1 ? 'active' : '')}
                         key={item}
                         onClick={() => handleUserAnswers(index, idx + 1)}
                     >

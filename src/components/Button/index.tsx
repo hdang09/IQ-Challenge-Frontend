@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import styles from './button.module.scss';
 import classnames from 'classnames/bind';
+import styles from './button.module.scss';
 
-const cx = classnames.bind(styles);
+const cn = classnames.bind(styles);
 
 type ButtonProps = {
     children: string | React.ReactNode;
@@ -11,18 +11,12 @@ type ButtonProps = {
 };
 
 const Button = ({ children = 'Click me!', href, onClick, ...rest }: ButtonProps) => {
-    if (href) {
-        return (
-            <Link href={href} className={cx('wrapper')} onClick={onClick} {...rest}>
-                {children}
-            </Link>
-        );
-    }
+    const Wrapper = href ? Link : 'button';
 
     return (
-        <button className={cx('wrapper')} onClick={onClick} {...rest}>
+        <Wrapper href={href || ''} className={cn('wrapper')} onClick={onClick} {...rest}>
             {children}
-        </button>
+        </Wrapper>
     );
 };
 

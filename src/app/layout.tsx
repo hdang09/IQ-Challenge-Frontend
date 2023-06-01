@@ -1,6 +1,8 @@
-import MobileLayout from '@/components/MobileHeader';
 import './globals.css';
+
 import { Inter } from 'next/font/google';
+import MobileLayout from '@/components/MobileHeader';
+import Toast from '@/components/Toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -14,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={inter.className} suppressHydrationWarning={true}>
                 <MobileLayout>{children}</MobileLayout>
+                <Toast />
             </body>
         </html>
     );

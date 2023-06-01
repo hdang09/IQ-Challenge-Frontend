@@ -1,19 +1,25 @@
 'use client';
 
-import { useState, useEffect, useContext } from 'react';
-import classnames from 'classnames/bind';
-import styles from './challenge.module.scss';
-import Sidebar from '@/components/Sidebar';
-import { startTheTest } from '@/utils/iqApi';
-import { useRouter } from 'next/navigation';
-import Card from '@/components/Card';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
-import { AnswersData } from '@/app/challenge/layout';
+import { useContext, useEffect, useState } from 'react';
 
-const cx = classnames.bind(styles);
+import AnswersData from '@/config/contextData';
+import Card from '@/components/Card';
+import Sidebar from '@/components/Sidebar';
+import classnames from 'classnames/bind';
+import localStorageUtil from '@/utils/localStorage';
+import { startTheTest } from '@/utils/iqApi';
+import styles from './challenge.module.scss';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
+
+AnswersData;
+
+const cn = classnames.bind(styles);
 
 export type Question = {
     _id: number;
+    id: number;
     isLong: boolean;
     multipleChoice: string[];
     question: string[];
@@ -21,18 +27,14 @@ export type Question = {
 
 const Challenge = () => {
     const [questions, setQuestions] = useState<Question[]>();
-    const [timeStart, setTimeStart] = useState<any>(() => {
-        if (typeof window !== 'undefined') {
-            const storedTime = localStorage.getItem('time_start');
-            return storedTime ? JSON.parse(storedTime) : timeStart;
-        } else {
-            return timeStart;
-        }
+    const [timeStart, setTimeStart] = useState<number>(() => {
+        const time = localStorageUtil.getItem('time_start');
+        return time ? JSON.parse(time) : Date.now();
     });
 
     const data = useContext(AnswersData);
 
-    const currentIndexQuestion: number = data?.currentIdx || 0;
+    const currentIndexQuestion: number = data.currentIdx || 0;
 
     const { width } = useWindowDimensions();
 
@@ -51,8 +53,8 @@ const Challenge = () => {
                 setQuestions(data.data.questions);
                 setTimeStart(data.data.timeStart);
                 localStorage.setItem('time_start', JSON.stringify(data.data.timeStart));
-            } catch (error) {
-                // toast.error(error.response.data.message);
+            } catch (error: any) {
+                toast.error(error.response.data.message);
                 console.log('Error: ', error);
             }
         };
@@ -60,9 +62,9 @@ const Challenge = () => {
     }, [router]);
 
     return (
-        <div className={cx('wrapper')}>
+        <div className={cn('wrapper')}>
             <Sidebar />
-            <div className={cx('container')}>
+            <div className={cn('container')}>
                 {width < 768 ? (
                     <Card
                         data={questions && questions[currentIndexQuestion]}
@@ -77,7 +79,7 @@ const Challenge = () => {
                             <Card
                                 data={question}
                                 index={idx++}
-                                key={question._id}
+                                key={question._id || question.id}
                                 timeStart={timeStart}
                                 isLong={question.isLong}
                             />

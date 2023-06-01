@@ -1,14 +1,14 @@
-import React from 'react';
+import { BsFillCheckCircleFill, BsQuestionCircleFill } from 'react-icons/bs';
+
+import { BiTimeFive } from 'react-icons/bi';
+import Button from '@/components/Button';
+import Image from 'next/image';
+import Logo from '@/assets/logo.svg';
+import Question from '@/assets/ready.svg';
 import classnames from 'classnames/bind';
 import styles from './ready.module.scss';
-import Image from 'next/image';
-import Question from '@/assets/ready.svg';
-import Logo from '@/assets/logo.svg';
-import Button from '@/components/Button';
-import { BiTimeFive } from 'react-icons/bi';
-import { BsQuestionCircleFill, BsFillCheckCircleFill } from 'react-icons/bs';
 
-const cx = classnames.bind(styles);
+const cn = classnames.bind(styles);
 
 const LIST = [
     {
@@ -27,27 +27,27 @@ const LIST = [
 
 const Ready = () => {
     return (
-        <>
+        <div className={cn('wrapper')}>
             <Image src={Question} alt="Ready for the challenge" />
-            <div className={cx('right-content')}>
-                <header className={cx('header')}>
+            <div className={cn('right-content')}>
+                <header className={cn('header')}>
                     <Image width={75} height={85} src={Logo} alt="F-Code Logo" />
                     <h2>F-Code</h2>
                 </header>
-                <h1 className={cx('title')}>Chuẩn bị sẵn sàng</h1>
-                <ul className={cx('list')}>
+                <h1 className={cn('title')}>Chuẩn bị sẵn sàng</h1>
+                <ul className={cn('list')}>
                     {LIST.map((item) => (
-                        <li className={cx('item')} key={item.name}>
+                        <li className={cn('item')} key={item.name}>
                             {item.icon}
                             <p>{item.name}</p>
                         </li>
                     ))}
                 </ul>
-                <div className={cx('submit-button')}>
+                <div className={cn('submit-button')}>
                     <Button href="/challenge">Bắt đầu thử thách</Button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

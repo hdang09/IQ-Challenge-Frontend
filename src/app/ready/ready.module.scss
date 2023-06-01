@@ -1,9 +1,18 @@
-@import '../register/register.module.scss';
-@import '../../../config/media-queries.scss';
+@import '@/app/register/register.module.scss';
+@import '@/config/media-queries.scss';
+
+.wrapper {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    @include sm {
+        flex-direction: column;
+    }
+}
 
 .right-content {
-    width: 425px;
-
     @include sm {
         width: auto;
         margin-bottom: 50px;

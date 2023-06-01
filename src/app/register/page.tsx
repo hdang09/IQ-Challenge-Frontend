@@ -1,16 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import styles from './register.module.scss';
-import classnames from 'classnames/bind';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Bulb from '@/assets/login.svg';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Logo from '@/assets/logo.svg';
-import Bulb from '@/assets/login.svg';
+import classnames from 'classnames/bind';
+import localStorage from '@/utils/localStorage';
 import { register } from '@/utils/iqApi';
+import styles from './register.module.scss';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-const cx = classnames.bind(styles);
+const cn = classnames.bind(styles);
 
 const Register = () => {
     const [name, setName] = useState<string>('');
@@ -30,50 +34,50 @@ const Register = () => {
                     localStorage.setItem('studentID', studentID);
                     router.push('/ready');
                 }
-            } catch (err) {
+            } catch (err: any) {
                 console.log(err);
-                // toast.error(err.response.data.message);
+                toast.error(err.response.data.message);
             }
         } else {
-            // toast.error('Bạn vui lòng nhập đúng MSSV giúp F-Code nhé!');
+            toast.error('Bạn vui lòng nhập đúng MSSV giúp F-Code nhé!');
         }
     };
 
     return (
-        <>
-            <div className={cx('left-content')}>
-                <header className={cx('header')}>
+        <div className={cn('wrapper')}>
+            <div className={cn('left-content')}>
+                <header className={cn('header')}>
                     <Image src={Logo} width={75} height={85} alt="F-Code Logo" />
                     <h2>F-Code</h2>
                 </header>
-                <h1 className={cx('title')}>
+                <h1 className={cn('title')}>
                     Nhập <span>Họ tên, MSSV</span> của bạn
                 </h1>
-                <p className={cx('description')}>
+                <p className={cn('description')}>
                     Chấp nhận tham gia thử thách bằng cách điền mã số sinh viên và tra cứu kết quả sau khi hoàn thành
                 </p>
                 <input
-                    className={cx('input', 'name')}
+                    className={cn('input', 'name')}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     onKeyDown={(e) => e.keyCode === 13 && validate}
                     placeholder="Nguyễn Văn A"
                 />
                 <input
-                    className={cx('input', 'code')}
+                    className={cn('input', 'code')}
                     value={studentID}
                     onChange={(e) => setStudentID(e.target.value)}
                     onKeyDown={(e) => e.keyCode === 13 && validate}
                     placeholder="SE180000"
                 />
-                <div className={cx('submit-button')}>
+                <div className={cn('submit-button')}>
                     <Button onClick={validate}>Tiếp tục</Button>
                 </div>
             </div>
-            <div className={cx('right-content')}>
+            <div className={cn('right-content')}>
                 <Image src={Bulb} alt="Right content" />
             </div>
-        </>
+        </div>
     );
 };
 
