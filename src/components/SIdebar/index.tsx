@@ -1,3 +1,5 @@
+'use client';
+
 import AnswersData from '@/config/contextData';
 import Button from '../Button';
 import Image from 'next/image';
