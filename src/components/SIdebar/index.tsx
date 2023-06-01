@@ -1,5 +1,3 @@
-import { useContext, useEffect } from 'react';
-
 import AnswersData from '@/config/contextData';
 import Button from '../Button';
 import Image from 'next/image';
@@ -11,6 +9,7 @@ import classnames from 'classnames/bind';
 import ecliseBG from '../../assets/eclipse6.png';
 import ecliseRunner from '../../assets/eclipse5.png';
 import styles from './sidebar.module.scss';
+import { useContext } from 'react';
 
 const cn = classnames.bind(styles);
 
