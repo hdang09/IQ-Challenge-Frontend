@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import AnswersData from '@/config/contextData';
 import Card from '@/components/Card';
+import Sidebar from '@/components/Sidebar';
 import classnames from 'classnames/bind';
 import localStorageUtil from '@/utils/localStorage';
 import { startTheTest } from '@/utils/iqApi';
@@ -11,10 +12,6 @@ import styles from './challenge.module.scss';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
-
-// import Sidebar from '../../components/Sidebar';
-
-AnswersData;
 
 const cn = classnames.bind(styles);
 
@@ -64,7 +61,7 @@ const Challenge = () => {
 
     return (
         <div className={cn('wrapper')}>
-            {/* <Sidebar /> */}
+            <Sidebar />
             <div className={cn('container')}>
                 {width < 768 ? (
                     <Card
