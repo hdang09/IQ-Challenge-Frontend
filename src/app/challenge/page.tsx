@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import AnswersData from '@/config/contextData';
 import Card from '@/components/Card';
-import Sidebar from '@/components/Sidebar';
+import MySidebar from '@/components/Sidebar';
 import classnames from 'classnames/bind';
 import localStorageUtil from '@/utils/localStorage';
 import { startTheTest } from '@/utils/iqApi';
@@ -61,7 +61,7 @@ const Challenge = () => {
 
     return (
         <div className={cn('wrapper')}>
-            <Sidebar />
+            <MySidebar />
             <div className={cn('container')}>
                 {width < 768 ? (
                     <Card
