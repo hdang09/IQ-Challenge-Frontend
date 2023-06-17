@@ -1,5 +1,6 @@
 @import '@/app/register/register.module.scss';
 @import '@/config/media-queries.scss';
+@import '@/app/variables.module.scss';
 
 .wrapper {
     width: 100vw;
@@ -30,7 +31,7 @@
     align-items: center;
 
     & svg {
-        fill: #45ce7b;
+        fill: $primary-color;
         width: 25px;
         height: 25px;
     }
@@ -41,7 +42,7 @@
         font-weight: 500;
         font-size: 20px;
         line-height: 24px;
-        color: #7b7b81;
+        color: $text-color;
     }
 
     @include sm {

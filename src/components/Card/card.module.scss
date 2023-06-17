@@ -1,4 +1,5 @@
 @import '../../config/media-queries.scss';
+@import '@/app/variables.module.scss';
 
 .wrapper {
     display: flex;
@@ -6,12 +7,12 @@
     width: 978px;
     padding: 36px 0;
     justify-content: space-evenly;
-    background: #ffffff;
+    background: $white-color;
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.035), 0px 6.6px 5.3px rgba(0, 0, 0, 0.03),
         0px 2.7px 2.2px rgba(0, 0, 0, 0.0196802);
     border-radius: 12px;
     margin-bottom: 20px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid $tertiary-color;
 
     span {
         display: none;
@@ -41,7 +42,7 @@
     @include md {
         span {
             cursor: pointer;
-            color: #45ce7b;
+            color: $primary-color;
             display: block;
         }
     }
@@ -54,7 +55,7 @@
         font-weight: 600;
         font-size: 18px;
         line-height: 19px;
-        color: #f9af0b;
+        color: $secondary-color;
         margin: 12px 0;
     }
 
@@ -67,11 +68,11 @@
         font-weight: 700;
         font-size: 24px;
         line-height: 29px;
-        color: #213547;
+        color: $black-color;
     }
 
     & p:not(:first-child) {
-        color: #213547;
+        color: $black-color;
     }
 
     & > p:first-child {
@@ -84,7 +85,7 @@
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
-        color: #21222d;
+        color: $black-color;
         margin-top: 15px;
     }
 
@@ -113,7 +114,7 @@
     padding: 8px;
     display: flex;
     align-items: center;
-    background: #f5f5f5;
+    background: $background-color;
     border-radius: 42px;
     margin-bottom: 20px;
 
@@ -129,13 +130,13 @@
         justify-content: center;
         min-width: 40px;
         min-height: 40px;
-        background: #ffffff;
+        background: $white-color;
         border-radius: 21px;
         font-weight: 700;
         font-size: 20px;
         line-height: 24px;
         text-align: center;
-        color: #21222d;
+        color: $black-color;
         margin-right: 16px;
     }
 
@@ -144,7 +145,7 @@
         font-weight: 500;
         font-size: 16px;
         line-height: 19px;
-        color: #21222d;
+        color: $black-color;
     }
 
     & img {
@@ -152,17 +153,17 @@
     }
 
     &:hover {
-        background-color: #bdbdbd;
+        background-color: $tertiary-color;
     }
 
     &:focus,
     &:focus-visible,
     &.active {
-        background: #45ce7b;
+        background: $primary-color;
 
         h1,
         p {
-            color: #fff;
+            color: $white-color;
         }
     }
 }

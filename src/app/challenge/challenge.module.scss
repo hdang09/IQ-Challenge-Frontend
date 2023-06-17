@@ -1,12 +1,14 @@
 @import '../../config/media-queries.scss';
+@import '../variables.module.scss';
+@import '@/app/variables.module.scss';
 
 .wrapper {
     display: flex;
     min-width: 100vw;
-    background: #f5f5f5;
+    background: $background-color;
 
     @include sm {
-        background: #fff;
+        background: $white-color;
     }
 }
 
@@ -19,9 +21,9 @@
     justify-content: center;
     align-items: center;
 
-    & > p {
-        color: #bdbdbd;
-    }
+    // & > p {
+    //     color: $text-color;
+    // }
 
     @include md {
         margin-left: 0;
@@ -50,7 +52,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #919196;
+        color: $text-color;
         min-width: 83px;
         height: 35px;
         border-radius: 50px;
@@ -58,12 +60,12 @@
     }
 
     & span.active {
-        background: #33bd64;
-        color: #fff;
+        background: $primary-color;
+        color: $white-color;
     }
 
     @include md {
         position: fixed;
-        background-color: #fff;
+        background-color: $white-color;
     }
 }
