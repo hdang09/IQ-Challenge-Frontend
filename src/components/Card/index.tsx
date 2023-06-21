@@ -1,4 +1,5 @@
 import AnswersData from '@/config/contextData';
+import Cookies from 'universal-cookie';
 import Image from 'next/image';
 import Popup from '../Popup';
 import { Question } from '@/app/challenge/page';
@@ -38,6 +39,7 @@ const Card = ({
 
         contextData.setAnswers(newUserAnswers);
         localStorageUtil.setItem('answers', JSON.stringify(newUserAnswers));
+        new Cookies().set('answers', newUserAnswers, { maxAge: 3600 });
     };
 
     const showImgOrText = (item: string) => {

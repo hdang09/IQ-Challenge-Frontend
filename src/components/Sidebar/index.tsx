@@ -1,3 +1,5 @@
+import { useContext, useEffect, useState } from 'react';
+
 import AnswersData from '@/config/contextData';
 import Button from '../Button';
 import Image from 'next/image';
@@ -9,12 +11,16 @@ import classnames from 'classnames/bind';
 import ecliseBG from '../../assets/eclipse6.png';
 import ecliseRunner from '../../assets/eclipse5.png';
 import styles from './sidebar.module.scss';
-import { useContext } from 'react';
 
 const cn = classnames.bind(styles);
 
 const Sidebar = () => {
     let data = useContext(AnswersData);
+    const [temp, setTemp] = useState(0);
+
+    useEffect(() => {
+        setTemp(1);
+    }, []);
 
     return (
         <aside className={cn('wrapper')}>
@@ -34,11 +40,18 @@ const Sidebar = () => {
             <div className={cn('item')}>
                 <h2>Câu hỏi</h2>
                 <div className={cn('questions')}>
-                    {data.answers.map((item, idx) => (
-                        <Link href={`/challenge#${idx + 1}`} className={cn('question', item ? 'active' : '')} key={idx}>
-                            {++idx}
-                        </Link>
-                    ))}
+                    {temp === 1 &&
+                        data.answers.map((item, idx) => {
+                            return (
+                                <Link
+                                    href={`/challenge#${idx + 1}`}
+                                    className={cn('sidebar_question__xan9J', item && 'active')}
+                                    key={idx}
+                                >
+                                    {++idx}
+                                </Link>
+                            );
+                        })}
                 </div>
             </div>
             <div className={cn('item')}>

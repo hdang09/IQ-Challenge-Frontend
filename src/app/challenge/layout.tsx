@@ -1,16 +1,16 @@
 'use client';
 
 import AnswersData from '@/config/contextData';
+import Cookies from 'universal-cookie';
 import classnames from 'classnames/bind';
-import localStorageUtil from '@/utils/localStorage';
 import styles from './challenge.module.scss';
 import { useState } from 'react';
 
 const cn = classnames.bind(styles);
 
 export default function ChallengeLayout({ children }: { children: React.ReactNode }) {
-    const answersStorage: string | null = localStorageUtil.getItem('answers');
-    const _answers = !answersStorage || answersStorage.length ? new Array(15).fill(0) : JSON.parse(answersStorage);
+    const answersCookie = new Cookies().get('answers');
+    const _answers = !answersCookie || !answersCookie.length ? new Array(15).fill(0) : answersCookie;
     const [answers, setAnswers] = useState<number[]>(_answers);
 
     const [currentIdx, setCurrentIdx] = useState(0);

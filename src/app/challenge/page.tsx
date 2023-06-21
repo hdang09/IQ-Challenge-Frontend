@@ -5,7 +5,7 @@ import { ReactElement, useContext, useEffect, useState } from 'react';
 import AnswersData from '@/config/contextData';
 import Card from '@/components/Card';
 import CardSkeleton from '@/components/Card/card-skeleton';
-import MySidebar from '@/components/MySidebar';
+import MySidebar from '@/components/Sidebar';
 import classnames from 'classnames/bind';
 import localStorageUtil from '@/utils/localStorage';
 import { startTheTest } from '@/utils/iqApi';
