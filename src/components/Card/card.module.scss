@@ -14,10 +14,6 @@
     margin-bottom: 20px;
     border: 1px solid $tertiary-color;
 
-    span {
-        display: none;
-    }
-
     @include sm {
         width: auto;
         height: auto;
@@ -38,18 +34,11 @@
     @include sm-md {
         margin-top: 100px;
     }
-
-    @include md {
-        span {
-            cursor: pointer;
-            color: $primary-color;
-            display: block;
-        }
-    }
 }
 
 .question {
     width: 400px;
+    margin-bottom: 24px;
 
     & h2 {
         font-weight: 600;
@@ -90,13 +79,14 @@
     }
 
     @include sm {
-        width: auto;
+        // width: auto;
 
         & img {
             width: calc(100vw - 32px);
         }
     }
 }
+
 .answers-list {
     button {
         border: none;
@@ -124,7 +114,7 @@
         }
     }
 
-    & span {
+    & > span:first-child {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -164,6 +154,18 @@
         h1,
         p {
             color: $white-color;
+        }
+    }
+}
+
+.submit-btn {
+    display: none;
+
+    @include md {
+        span {
+            cursor: pointer;
+            color: $primary-color;
+            display: block;
         }
     }
 }

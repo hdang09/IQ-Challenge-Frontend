@@ -23,23 +23,28 @@ const Register = () => {
     let router = useRouter();
 
     const validate = async () => {
-        const isValid = /^(S|s)[E|A|S|s|e|a]+([0-9]{6})$/.test(studentID);
+        if (!name.length) {
+            toast.error('Họ và tên không được bỏ trống!');
+            return;
+        }
 
-        if (isValid) {
-            try {
-                const res = await register(name, studentID);
-                if (res.status === 200) {
-                    localStorage.setItem('answers', '[]');
-                    localStorage.setItem('name', name);
-                    localStorage.setItem('studentID', studentID);
-                    router.push('/ready');
-                }
-            } catch (err: any) {
-                console.log(err);
-                toast.error(err.response.data.message);
+        const isValidStudentID: boolean = /^(S|s)[E|A|S|s|e|a]+([0-9]{6})$/.test(studentID);
+        if (!isValidStudentID) {
+            toast.error('Bạn vui lòng nhập đúng MSSV theo cú pháp SExxxxxx, SAxxxxxx, SSxxxxxx giúp F-Code nhé!');
+            return;
+        }
+
+        try {
+            const res = await register(name, studentID);
+            if (res.status === 200) {
+                localStorage.setItem('answers', '[]');
+                localStorage.setItem('name', name);
+                localStorage.setItem('studentID', studentID);
+                router.push('/ready');
             }
-        } else {
-            toast.error('Bạn vui lòng nhập đúng MSSV giúp F-Code nhé!');
+        } catch (err: any) {
+            console.log(err);
+            toast.error(err.response.data.message);
         }
     };
 
@@ -68,7 +73,7 @@ const Register = () => {
                     value={studentID}
                     onChange={(e) => setStudentID(e.target.value)}
                     onKeyDown={(e) => e.keyCode === 13 && validate}
-                    placeholder="SE180000"
+                    placeholder="SExxxxxx"
                 />
                 <div className={cn('submit-button')}>
                     <Button onClick={validate}>Tiếp tục</Button>

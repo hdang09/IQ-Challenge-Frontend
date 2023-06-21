@@ -1,5 +1,3 @@
-import { useContext, useEffect, useState } from 'react';
-
 import AnswersData from '@/config/contextData';
 import Image from 'next/image';
 import Popup from '../Popup';
@@ -8,6 +6,7 @@ import Timer from '../Timer';
 import classnames from 'classnames/bind';
 import localStorageUtil from '@/utils/localStorage';
 import styles from './card.module.scss';
+import { useContext } from 'react';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 const cn = classnames.bind(styles);
@@ -56,6 +55,7 @@ const Card = ({
                 <h2>Câu hỏi số {index + 1}</h2>
                 {data?.question?.map((item) => showImgOrText(item))}
             </div>
+
             <div className={cn('answers-list')}>
                 {data?.multipleChoice?.map((item, idx) => (
                     <button
@@ -68,10 +68,13 @@ const Card = ({
                     </button>
                 ))}
             </div>
+
             {index === 14 ? (
-                <Popup trigger={<span>Nộp bài</span>} />
+                <Popup trigger={<span className={cn('submit-btn')}>Nộp bài</span>} />
             ) : (
-                <span onClick={changeNextQuestion}>Tiếp theo</span>
+                <span className={cn('submit-btn')} onClick={changeNextQuestion}>
+                    Tiếp theo
+                </span>
             )}
         </div>
     );

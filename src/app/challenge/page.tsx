@@ -1,9 +1,10 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 
 import AnswersData from '@/config/contextData';
 import Card from '@/components/Card';
+import CardSkeleton from '@/components/Card/card-skeleton';
 import MySidebar from '@/components/MySidebar';
 import classnames from 'classnames/bind';
 import localStorageUtil from '@/utils/localStorage';
@@ -25,10 +26,9 @@ export type Question = {
 
 const Challenge = () => {
     const [questions, setQuestions] = useState<Question[]>();
-    const [timeStart, setTimeStart] = useState<number>(() => {
-        const time = localStorageUtil.getItem('time_start');
-        return time ? JSON.parse(time) : Date.now();
-    });
+    const [timeStart, setTimeStart] = useState<number>(() =>
+        JSON.parse(localStorageUtil.getItem('time_start') || 'Date.now()')
+    );
 
     const data = useContext(AnswersData);
 
@@ -59,31 +59,43 @@ const Challenge = () => {
         startTheChallenge();
     }, [router]);
 
+    const CardComponent = (): ReactElement => {
+        if (!questions?.length) {
+            return <CardSkeleton />;
+        }
+
+        if (width < 768) {
+            return (
+                <Card
+                    data={questions && questions[currentIndexQuestion]}
+                    index={currentIndexQuestion}
+                    key={currentIndexQuestion}
+                    timeStart={timeStart}
+                    isLong={questions && questions[currentIndexQuestion]?.isLong}
+                />
+            );
+        }
+
+        return (
+            <>
+                {questions?.map((question, idx) => (
+                    <Card
+                        data={question}
+                        index={idx++}
+                        key={question._id || question.id}
+                        timeStart={timeStart}
+                        isLong={question.isLong}
+                    />
+                ))}
+            </>
+        );
+    };
+
     return (
         <div className={cn('wrapper')}>
             <MySidebar />
             <div className={cn('container')}>
-                {width < 768 ? (
-                    <Card
-                        data={questions && questions[currentIndexQuestion]}
-                        index={currentIndexQuestion}
-                        key={currentIndexQuestion}
-                        timeStart={timeStart}
-                        isLong={questions && questions[currentIndexQuestion]?.isLong}
-                    />
-                ) : (
-                    questions?.map((question, idx) => {
-                        return (
-                            <Card
-                                data={question}
-                                index={idx++}
-                                key={question._id || question.id}
-                                timeStart={timeStart}
-                                isLong={question.isLong}
-                            />
-                        );
-                    })
-                )}
+                <CardComponent />
             </div>
         </div>
     );

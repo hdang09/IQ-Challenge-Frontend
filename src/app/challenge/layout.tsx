@@ -9,10 +9,10 @@ import { useState } from 'react';
 const cn = classnames.bind(styles);
 
 export default function ChallengeLayout({ children }: { children: React.ReactNode }) {
-    const init = localStorageUtil.getItem('answers')
-        ? JSON.parse(localStorage.getItem('answers') || '[]')
-        : new Array(15).fill(0);
-    const [answers, setAnswers] = useState<number[]>(init);
+    const answersStorage: string | null = localStorageUtil.getItem('answers');
+    const _answers = !answersStorage || answersStorage.length ? new Array(15).fill(0) : JSON.parse(answersStorage);
+    const [answers, setAnswers] = useState<number[]>(_answers);
+
     const [currentIdx, setCurrentIdx] = useState(0);
 
     const handleClick = (index: number) => {
