@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { GetServerSideProps } from 'next';
+import Skeleton from 'react-loading-skeleton';
 import classnames from 'classnames/bind';
 import localStorage from '@/utils/localStorage';
 import { seeScoreBoard } from '@/utils/iqApi';
@@ -88,8 +88,22 @@ const Rank: React.FC = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {scoreboard?.users.map((user, i) => {
-                        if (user.name !== '') {
+                    {!scoreboard ? (
+                        <>
+                            {[...Array(5)].map((_, index) => (
+                                <tr key={index} className={cn('body-row')}>
+                                    {[...Array(5)].map((_, index) => (
+                                        <td key={index}>
+                                            <Skeleton />
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </>
+                    ) : (
+                        scoreboard.users.map((user, i) => {
+                            if (user.name === '') return;
+
                             return (
                                 <tr className={cn('body-row', scoreboard?.studentRank - 1 === i && 'active')} key={i}>
                                     <td>{++i}</td>
@@ -99,8 +113,8 @@ const Rank: React.FC = (props) => {
                                     <td>{timeConvert(user.time)}</td>
                                 </tr>
                             );
-                        }
-                    })}
+                        })
+                    )}
                 </tbody>
             </table>
         </main>

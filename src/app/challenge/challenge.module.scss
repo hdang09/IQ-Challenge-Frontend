@@ -35,12 +35,13 @@
 }
 
 .questions {
-    display: flex;
+    display: none;
     height: max-content;
     width: 100%;
     overflow-y: hidden;
     width: 100%;
     padding: 4px;
+    z-index: 99;
 
     &::-webkit-scrollbar {
         border-radius: 0;
@@ -65,6 +66,7 @@
     }
 
     @include md {
+        display: flex;
         position: fixed;
         background-color: $white-color;
     }

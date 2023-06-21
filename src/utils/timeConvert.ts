@@ -8,7 +8,7 @@ export const timeConvert = (mSec: number): string => {
     const formattedMinutes: string = remainingMinutes < 10 ? `0${remainingMinutes}` : `${remainingMinutes}`;
     const formattedSeconds: string = remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`;
 
-    if (remainingMinutes === 0 && seconds === 0) return '--:--';
+    if (!remainingMinutes && !seconds) return '--:--';
     if (hours === 0) return `${formattedMinutes}:${formattedSeconds}`;
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 };

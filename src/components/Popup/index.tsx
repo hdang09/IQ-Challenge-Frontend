@@ -1,11 +1,13 @@
 import 'reactjs-popup/dist/index.css';
 
 import Button from '../Button';
+import Cookies from 'universal-cookie';
 import ReactPopup from 'reactjs-popup';
 import classNames from 'classnames/bind';
 import localStorage from '@/utils/localStorage';
 import styles from './popup.module.scss';
 import { submitTheTest } from '@/utils/iqApi';
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
 // import { toast } from 'react-toastify';
@@ -24,16 +26,27 @@ const Popup = ({ trigger }: { trigger: any }) => {
 
         if (!name || !code) return;
 
-        try {
-            await submitTheTest(name, code, answers);
-            localStorage.removeItem('name');
-            localStorage.removeItem('answers');
-            localStorage.removeItem('time_start');
-            router.push('/success');
-        } catch (error) {
-            console.error(error);
-            // toast.error(error.response.data.message);
-        }
+        toast.promise(submitTheTest(name, code, answers), {
+            pending: 'Đang nộp bài...',
+            success: {
+                render({ data }) {
+                    localStorage.removeItem('name');
+                    localStorage.removeItem('answers');
+                    new Cookies().remove('answers');
+                    localStorage.removeItem('time_start');
+                    router.push('/success');
+                    return data?.data?.message || 'Nộp bài thành công';
+                },
+            },
+            error: {
+                render({ data }) {
+                    // TODO: Fix this return
+                    console.log(data);
+                    // return data?.response?.data?.message! || 'Có lỗi trong việc nộp bài';
+                    return 'Có lỗi trong việc nộp bài';
+                },
+            },
+        });
     };
 
     const Comp: any = (close: any) => {

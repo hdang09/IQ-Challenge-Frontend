@@ -34,18 +34,26 @@ const Register = () => {
             return;
         }
 
-        try {
-            const res = await register(name, studentID);
-            if (res.status === 200) {
-                localStorage.setItem('answers', '[]');
-                localStorage.setItem('name', name);
-                localStorage.setItem('studentID', studentID);
-                router.push('/ready');
-            }
-        } catch (err: any) {
-            console.log(err);
-            toast.error(err.response.data.message);
-        }
+        toast.promise(register(name, studentID), {
+            pending: 'Đang đăng ký tài khoản...',
+            success: {
+                render({ data }) {
+                    localStorage.setItem('answers', '[]');
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('studentID', studentID);
+                    router.push('/ready');
+                    return data?.data?.message || 'Đăng ký thành công';
+                },
+            },
+            error: {
+                render({ data }) {
+                    // TODO: Fix this return
+                    console.log(data);
+                    // return data?.response?.data?.message! || 'Có lỗi trong việc đăng ký';
+                    return 'Có lỗi trong việc đăng ký';
+                },
+            },
+        });
     };
 
     return (
