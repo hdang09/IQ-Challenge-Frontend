@@ -162,10 +162,8 @@
     display: none;
 
     @include md {
-        span {
-            cursor: pointer;
-            color: $primary-color;
-            display: block;
-        }
+        cursor: pointer;
+        color: $primary-color;
+        display: block;
     }
 }

@@ -32,7 +32,7 @@
     align-items: center;
 
     & img {
-        fill: #45ce7b;
+        fill: $primary-color;
         width: 25px;
         height: 25px;
     }
@@ -70,13 +70,13 @@
         flex: 1;
         font-weight: 500;
         font-size: 16px;
-        color: #000;
+        color: $black-color;
     }
 
     & div {
         font-weight: 500;
         font-size: 20px;
-        color: #45ce7b;
+        color: $primary-color;
     }
 }
 

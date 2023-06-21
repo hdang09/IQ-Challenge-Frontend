@@ -1,8 +1,9 @@
 @import '@/config/media-queries.scss';
+@import '@/app/variables.module.scss';
 
 .wrapper {
     width: 50vw;
-    background-color: #fff;
+    background-color: $white-color;
     /* max-height: 100vh; */
 
     text-align: center;
@@ -15,7 +16,7 @@
         margin: 22px 0;
 
         span {
-            color: #f9af0b;
+            color: $secondary-color;
         }
     }
 
@@ -23,7 +24,7 @@
         color: #919196;
 
         span {
-            color: #45ce7b;
+            color: $primary-color;
         }
     }
 
@@ -32,7 +33,7 @@
         height: inherit;
 
         h2 {
-            color: #000;
+            color: $black-color;
             font-size: 26px;
             margin-bottom: 6px;
         }
@@ -44,8 +45,8 @@
     margin-top: 18px;
 
     & thead tr th {
-        background: #45ce7b;
-        color: #fff;
+        background: $primary-color;
+        color: $white-color;
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         transition: background 0.3s ease;
         padding: 16px 0;
@@ -59,17 +60,17 @@
     }
 
     /* & tbody tr td:nth-child(2) {
-        color: #45ce7b;
+        color: $primary-color;
     } */
 }
 
 .body-row {
     tr {
-        background: #fff;
+        background: $white-color;
     }
 
     &.active {
-        background: #fafafa;
-        color: #45ce7b;
+        background: $white-color;
+        color: $primary-color;
     }
 }

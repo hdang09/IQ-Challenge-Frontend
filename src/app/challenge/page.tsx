@@ -26,9 +26,10 @@ export type Question = {
 
 const Challenge = () => {
     const [questions, setQuestions] = useState<Question[]>();
-    const [timeStart, setTimeStart] = useState<number>(() =>
-        JSON.parse(localStorageUtil.getItem('time_start') || 'Date.now()')
-    );
+    const [timeStart, setTimeStart] = useState<number>(() => {
+        const time = localStorageUtil.getItem('time_start');
+        return time ? JSON.parse(time) : Date.now();
+    });
 
     const data = useContext(AnswersData);
 
