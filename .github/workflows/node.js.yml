@@ -4,59 +4,59 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    push:
+        branches: ['master']
+    pull_request:
+        branches: ['master']
 
 jobs:
-  deploy-image:
-    runs-on: ubuntu-latest
+    deploy-image:
+        runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      
-    - name: Use Node.js environment
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
 
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-      
-    - name: Add .env file
-      run: echo "${{ secrets.ENVIROMENT_VARIABLES }}" >> .env
+            # - name: Use Node.js environment
+            #   uses: actions/setup-node@v3
+            #   with:
+            #       node-version: 16
 
-    - name: Build Next.js application
-      run: yarn build
+            # - name: Cache dependencies
+            #   uses: actions/cache@v2
+            #   with:
+            #       path: ~/.cache/yarn
+            #       key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-    - name: Build & push Dockerfile image
-      uses: mr-smithers-excellent/docker-build-push@v6
-      with:
-        image: hdang09/iq-fe
-        tags: v1, latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+            # - name: Install dependencies
+            #   run: yarn install --frozen-lockfile
 
-  pull-image:
-    runs-on: self-hosted
-    needs: deploy-image
+            - name: Add .env file
+              run: echo "${{ secrets.ENVIROMENT_VARIABLES }}" >> .env
 
-    steps:
-      - name: Stop and Remove the current container
-        run: |
-          sudo docker stop iq-fe || true
-          sudo docker rm iq-fe || true
-      - name: Pull the latest image
-        run: sudo docker pull hdang09/iq-fe
-      - name: Start Docker image
-        run: sudo docker run --name iq-fe -d -p 3001:3000 hdang09/iq-fe
+            # - name: Build Next.js application
+            #   run: yarn build
+
+            - name: Build & push Dockerfile image
+              uses: mr-smithers-excellent/docker-build-push@v6
+              with:
+                  image: hdang09/iq-fe
+                  tags: v1, latest
+                  registry: docker.io
+                  dockerfile: Dockerfile
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+
+    pull-image:
+        runs-on: self-hosted
+        needs: deploy-image
+
+        steps:
+            - name: Stop and Remove the current container
+              run: |
+                  sudo docker stop iq-fe || true
+                  sudo docker rm iq-fe || true
+            - name: Pull the latest image
+              run: sudo docker pull hdang09/iq-fe
+            - name: Start Docker image
+              run: sudo docker run --name iq-fe -d -p 3001:3000 hdang09/iq-fe
